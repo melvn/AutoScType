@@ -1,6 +1,8 @@
 # Purpose
 
-ScType is a static analysis tool written in Python3 to detect accounting errors in Solidity smart contracts. It can be found on [Github](https://github.com/NioTheFirst/ScType).
+ScType2 is an upgraded version of the original static analysis tool written in Python3 to detect accounting errors in Solidity smart contracts. The original work can be found at [Github](https://github.com/NioTheFirst/ScType).
+
+## Documentation 
 
 ScType leverages the single-static-assignment representation produced by [Slither](https://github.com/crytic/slither) to perform abstract type inference. It assigns initial abstract types to select variables based on a type file or inference from the code. Then, the abstract types are propogated throughout the contract based on the produced representation and typechecked accordingly.
 
@@ -9,6 +11,29 @@ ScType checks each individual function within the code. Users are able to specif
 ScType can handle simple variables as well as arrays and object fields. It can also handle function calls as long as the function is located within the user-defined scope. This includes calls to functions outside of the current file being checked. See the section "Build and Run from Source Code" for more information on usage and scope.
 
 In the following sections, we describe how to pull a Docker image for ScType, and how to reproduce the key results from our paper using the image.
+
+## Automatic Type Annotation
+
+ScType2 now includes an automatic type annotation feature that uses GPT-4o to infer types for variables in Solidity smart contracts. This feature can significantly reduce the manual effort required to create type files. In the original ICSE2024 Paper by Brian Zhang under Section 4.1 it is noted that future work can be done to automatically infer types through mining or, in this case, using the semantic reasoning ability of Large Language Models to cheaply and efficently mine the financial types through solidity source code alone.
+
+### How it works
+
+1. The tool analyzes the Solidity code using GPT-4o.
+2. It generates type annotations for variables, focusing on their financial meanings and characteristics.
+3. The generated annotations are used alongside any existing manual annotations.
+
+### Using the Automatic Type Annotation
+
+To use the automatic type annotation feature:
+
+1. Ensure you have set up your OpenAI API key in the `generate_annotations.py` file.
+2. Run the annotation generator:
+For a single file:  `python generate_annotations.py file path/to/your/contract.sol`
+For a directory: `python generate_annotations.py directory path/to/your/contracts/`
+3. The tool will generate `_types.txt` and `_ftypes.txt` files for each processed Solidity file.
+
+Note: While the automatic annotation feature can significantly reduce manual work, it's recommended to review and potentially adjust the generated annotations for critical contracts.
+
 
 The Docker Image requires 24GB of space.
 
