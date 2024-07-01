@@ -41,22 +41,15 @@ For a directory: `python generate_annotations.py directory path/to/your/contract
 Note: While the automatic annotation feature will significantly reduce manual work, it's recommended to review and potentially adjust the generated annotations for critical contracts.
 
 <br>
+
 The Docker Image requires 24GB of space.
 
 ScType is applying for:
 
-Available. ScType is publically available on Github. We have also provided a runnable image of the tool on Dockerhub and provide instructions to pull and run below.
+1. Available. ScType is publically available on [Github](https://github.com/NioTheFirst/ScType). We have also provided a runnable image of the tool on [Dockerhub](https://hub.docker.com/repository/docker/icse24sctype/full/general) and provide instructions to pull and run below.
 
-Reusable. We provide detailed instructions on how to reproduce the results in the paper. We also provide an explanation of key components of ScType and how developers can leverage our tool in the file README_dev.md in this directory. Finally, ScType is built on top of Slither, a well-known open-source project. Using open-source code improves reusability by making the code easier to understand.
-
-Provenance
-ScType is publically available in this repository on Github, and a runnable docker image of the tool can be found on Dockerhub. Please refer to the "Setup" section for more details.
-
-The DOI for this repository on Zenodo is provided below:
-
-DOI
-
-The pre-print for the corresponding paper to this artifact, Towards Finding Accounting Errors in Smart Contracts, can be found in this repository. For convenience, the link is provided.
+2. Reusable. We provide detailed instructions on how to reproduce the results in the paper. We also provide an explanation of key components of ScType and how developers can leverage our tool in the file [`README_dev.md`](XXX) in this directory.
+Finally, ScType is built on top of Slither, a well-known open-source project. Using open-source code improves reusability by making the code easier to understand.
 
 # Provenance
 
