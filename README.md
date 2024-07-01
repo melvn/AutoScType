@@ -27,23 +27,36 @@ ScType2 now includes an automatic type annotation feature that uses GPT-4o to in
 To use the automatic type annotation feature:
 
 1. Ensure you have set up your OpenAI API key in the `generate_annotations.py` file.
+
 2. Run the annotation generator:
 For a single file:  `python generate_annotations.py file path/to/your/contract.sol`
+
 For a directory: `python generate_annotations.py directory path/to/your/contracts/`
-3. The tool will generate `_types.txt` and `_ftypes.txt` files for each processed Solidity file.
 
-Note: While the automatic annotation feature can significantly reduce manual work, it's recommended to review and potentially adjust the generated annotations for critical contracts.
+3. The tool will generate two files for each processed Solidity file:
+   - `{contract_name}_types.txt`: Contains token type annotations
+   - `{contract_name}_ftypes.txt`: Contains finance type annotations
+   These files will be placed in the same directory as the corresponding Solidity file.
 
+Note: While the automatic annotation feature will significantly reduce manual work, it's recommended to review and potentially adjust the generated annotations for critical contracts.
 
+<br>
 The Docker Image requires 24GB of space.
 
 ScType is applying for:
 
-1. Available. ScType is publically available on [Github](https://github.com/NioTheFirst/ScType). We have also provided a runnable image of the tool on [Dockerhub](https://hub.docker.com/repository/docker/icse24sctype/full/general) and provide instructions to pull and run below.
+Available. ScType is publically available on Github. We have also provided a runnable image of the tool on Dockerhub and provide instructions to pull and run below.
 
-2. Reusable. We provide detailed instructions on how to reproduce the results in the paper. We also provide an explanation of key components of ScType and how developers can leverage our tool in the file [`README_dev.md`](XXX) in this directory.
-Finally, ScType is built on top of Slither, a well-known open-source project. Using open-source code improves reusability by making the code easier to understand.
+Reusable. We provide detailed instructions on how to reproduce the results in the paper. We also provide an explanation of key components of ScType and how developers can leverage our tool in the file README_dev.md in this directory. Finally, ScType is built on top of Slither, a well-known open-source project. Using open-source code improves reusability by making the code easier to understand.
 
+Provenance
+ScType is publically available in this repository on Github, and a runnable docker image of the tool can be found on Dockerhub. Please refer to the "Setup" section for more details.
+
+The DOI for this repository on Zenodo is provided below:
+
+DOI
+
+The pre-print for the corresponding paper to this artifact, Towards Finding Accounting Errors in Smart Contracts, can be found in this repository. For convenience, the link is provided.
 
 # Provenance
 

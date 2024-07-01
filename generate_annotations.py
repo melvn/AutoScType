@@ -83,7 +83,7 @@ def infer_types(content):
     - They should not take the value of constants. For example, if int a = 1000, it has type {-1, -1, 3, -1}, since there is no associated token currency attributed to a.
     - The normalization field typically represents the number of decimal places for the token or value.
 
-    For the provided smart contract, please output the corresponding type annotations in one of the following formats:
+    For the provided smart contract/s, please output the corresponding type annotations in one of the following formats:
 
     1. [t], function_name, variable_name
     - For variables within functions or global variables
@@ -102,7 +102,7 @@ def infer_types(content):
     Here's the Solidity code to analyze:
     {content}
 
-    Please provide your type annotations and analysis below. Only do what is asked. No extraneous information.
+    Please output the corresponding type annotations given the above type system. Only do what is asked. No extraneous information.
     """
 
     response = openai.ChatCompletion.create(
