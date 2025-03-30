@@ -1,0 +1,68 @@
+[*c], DelegatedStaking
+
+```
+[*c], DelegatedStaking
+[t], global, validatorCoolDown, -1, -1, 18
+[t], global, delegatorCoolDown, -1, -1, 18
+[t], global, maxCapMultiplier, -1, -1, 18
+[t], global, validatorMinStakedRequired, 1, -1, 18, 'u'
+[t], global, allocatedTokensPerEpoch, 1, -1, 18, 'u'
+[t], global, rewardsLocked, 1, -1, 18, 'u'
+[t], global, endEpoch, -1, -1, 18
+[t], global, totalGlobalShares, -1, -1, 18
+[t], global, lastUpdateEpoch, -1, -1, 18
+[t], global, globalExchangeRate, -1, -1, 18
+[t], global, validatorsN, -1, -1, 18
+[ta], global, CQT, 0xD417144312DbF50465b1C641d016962017Ef6240
+[t*], global, Staking, staked, 1, -1, 18, 'u'
+[t*], global, Staking, shares, -1, -1, 18
+[t*], global, Unstaking, coolDownEnd, -1, -1, 18
+[t*], global, Unstaking, amount, 1, -1, 18, 'u'
+[t*], global, Validator, commissionRate, -1, -1, 18
+[t*], global, Validator, disabledEpoch, -1, -1, 18
+[t*], global, Validator, globalShares, -1, -1, 18
+[t*], global, Validator, lastUpdateGlobalRate, -1, -1, 18
+[t*], global, Validator, totalShares, -1, -1, 18
+[t*], global, Validator, delegated, 1, -1, 18, 'u'
+[t*], global, Validator, exchangeRate, -1, -1, 18
+[t*], global, Validator, commissionAvailableToRedeem, 1, -1, 18, 'u'
+[t], initialize, minStakedRequired, 1, -1, 18, 'u'
+[t], _transferToContract, amount, 1, -1, 18, 'u'
+[t], _transferFromContract, amount, 1, -1, 18, 'u'
+[t], depositRewardTokens, amount, 1, -1, 18, 'u'
+[t], takeOutRewardTokens, amount, 1, -1, 18, 'u'
+[t], _sharesToTokens, sharesN, -1, -1, 18
+[t], _sharesToTokens, rate, -1, -1, 18
+[t], _sharesToTokens, return, 1, -1, 18, 'u'
+[t], _tokensToShares, amount, 1, -1, 18, 'u'
+[t], _tokensToShares, rate, -1, -1, 18
+[t], _tokensToShares, return, -1, -1, 18
+[t], stake, validatorId, -1, -1, 18
+[t], stake, amount, 1, -1, 18, 'u'
+[t], _stake, validatorId, -1, -1, 18
+[t], _stake, amount, 1, -1, 18, 'u'
+[t], unstake, validatorId, -1, -1, 18
+[t], unstake, amount, 1, -1, 18, 'u'
+[t], recoverUnstaking, amount, 1, -1, 18, 'u'
+[t], recoverUnstaking, validatorId, -1, -1, 18
+[t], recoverUnstaking, unstakingId, -1, -1, 18
+[t], _redeemRewards, validatorId, -1, -1, 18
+[t], _redeemRewards, amount, 1, -1, 18, 'u'
+[t], redeemAllRewards, validatorId, -1, -1, 18
+[t], redeemRewards, validatorId, -1, -1, 18
+[t], redeemRewards, amount, 1, -1, 18, 'u'
+[t], addValidator, commissionRate, -1, -1, 18
+[t], disableValidator, validatorId, -1, -1, 18
+[t], setAllocatedTokensPerEpoch, amount, 1, -1, 18, 'u'
+[t], setMaxCapMultiplier, amount, -1, -1, 18
+[t], setValidatorCommissionRate, amount, -1, -1, 18
+[t], setValidatorCommissionRate, validatorId, -1, -1, 18
+[t], setValidatorMinStakedRequired, amount, 1, -1, 18, 'u'
+[t], redelegateUnstaked, amount, 1, -1, 18, 'u'
+[t], redelegateUnstaked, oldValidatorId, -1, -1, 18
+[t], redelegateUnstaked, newValidatorId, -1, -1, 18
+[t], redelegateUnstaked, unstakingId, -1, -1, 18
+[t], transferUnstakedOut, amount, 1, -1, 18, 'u'
+[t], transferUnstakedOut, validatorId, -1, -1, 18
+[t], transferUnstakedOut, unstakingId, -1, -1, 18
+```

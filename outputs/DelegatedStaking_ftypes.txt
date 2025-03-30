@@ -1,0 +1,52 @@
+```
+[t], global, validatorCoolDown, f:-1
+[t], global, delegatorCoolDown, f:-1
+[t], global, maxCapMultiplier, f:-1
+[t], global, validatorMinStakedRequired, f:0
+[t], global, allocatedTokensPerEpoch, f:0
+[t], global, rewardsLocked, f:0
+[t], global, endEpoch, f:-1
+[t], global, totalGlobalShares, f:1
+[t], global, lastUpdateEpoch, f:-1
+[t], global, globalExchangeRate, f:40
+[t], global, validatorsN, f:-1
+[t*], global, Staking, staked, f:0
+[t*], global, Staking, shares, f:1
+[t*], global, Unstaking, coolDownEnd, f:-1
+[t*], global, Unstaking, amount, f:0
+[t*], global, Validator, commissionRate, f:12
+[t*], global, Validator, disabledEpoch, f:-1
+[t*], global, Validator, globalShares, f:1
+[t*], global, Validator, lastUpdateGlobalRate, f:40
+[t*], global, Validator, totalShares, f:1
+[t*], global, Validator, delegated, f:0
+[t*], global, Validator, exchangeRate, f:40
+[t*], global, Validator, commissionAvailableToRedeem, f:60
+[t], initialize, minStakedRequired, f:0
+[t], _transferToContract, amount, f:0
+[t], _transferFromContract, amount, f:0
+[t], depositRewardTokens, amount, f:0
+[t], takeOutRewardTokens, amount, f:0
+[t], _sharesToTokens, sharesN, f:1
+[t], _sharesToTokens, rate, f:40
+[t], _sharesToTokens, return, f:0
+[t], _tokensToShares, amount, f:0
+[t], _tokensToShares, rate, f:40
+[t], _tokensToShares, return, f:1
+[t], stake, validatorId, f:-1
+[t], stake, amount, f:0
+[t], _stake, validatorId, f:-1
+[t], _stake, amount, f:0
+[t], unstake, validatorId, f:-1
+[t], unstake, amount, f:0
+[t], recoverUnstaking, amount, f:0
+[t], recoverUnstaking, validatorId, f:-1
+[t], recoverUnstaking, unstakingId, f:-1
+[t], _redeemRewards, validatorId, f:-1
+[t], _redeemRewards, amount, f:60
+[t], redeemAllRewards, validatorId, f:-1
+[t], redeemRewards, validatorId, f:-1
+[t], redeemRewards, amount, f:60
+[t], addValidator, commissionRate, f:12
+[t], disableValidator, validatorId, f:-1
+[t], setAllocatedTokensPerEpoch, amount, f:0
