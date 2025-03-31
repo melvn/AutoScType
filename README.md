@@ -1,3 +1,129 @@
+# AutoScType
+
+AutoScType is a Solidity smart contract type annotation generator that uses AI to analyze contracts and generate precise type annotations for token and financial types.
+
+## Features
+
+- **Batch Processing**: Efficiently processes entire Solidity contracts in a single API call
+- **Dual Annotation Types**: Generates both token type and financial type annotations
+- **Multiple Model Support**: Compatible with both OpenAI and DeepSeek AI models
+- **Intelligent Inference**: Infers token and financial types based on naming patterns and semantics
+- **Generic Compatibility**: Works with any Ethereum/Solidity smart contract
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/AutoScType.git
+   cd AutoScType
+   ```
+
+2. Install required dependencies:
+   ```bash
+   pip install openai requests
+   ```
+
+## Usage
+
+```bash
+python src/cli.py <solidity_file_or_directory> --output-dir <output_directory> --api-key <your_api_key> [--model-provider <openai|deepseek>]
+```
+
+### Arguments
+
+- `<solidity_file_or_directory>`: Path to a Solidity file or directory containing Solidity files
+- `--output-dir`: Directory where annotation files will be saved (default: "output")
+- `--api-key`: Your API key for OpenAI or DeepSeek
+- `--model-provider`: AI model provider to use (options: "openai" or "deepseek", default: "deepseek")
+- `--debug`: Enable debug output
+
+### Example
+
+```bash
+python src/cli.py contracts/MyToken.sol --output-dir outputs --api-key sk-your-api-key-here --model-provider deepseek
+```
+
+## Output Files
+
+For each Solidity contract, AutoScType generates two annotation files:
+
+1. `<ContractName>_types.txt`: Token type annotations
+2. `<ContractName>_ftypes.txt`: Financial type annotations
+
+### Token Type Format
+
+- Contract flag: `[*c], <contract_name>`
+- State variables: `[t], global, <variable_name>, <token_numerator>, <token_denominator>, <scaling_factor>, 'u'`
+- Addresses: `[ta], global, <variable_name>, <token_address>`
+- Arrays: `[tref], <array_name>, <token_numerator>, <token_denominator>, <scaling_factor>`
+- Struct fields: `[t*], global, <struct_name>, <field_name>, <token_numerator>, <token_denominator>, <scaling_factor>, 'u'`
+- Function parameters: `[t], <function_name>, <param_name>, <token_numerator>, <token_denominator>, <scaling_factor>, 'u'`
+- Function returns: `[t], <function_name>, return, <token_numerator>, <token_denominator>, <scaling_factor>, 'u'`
+
+#### Token Types
+
+- Stablecoins (USDC, USDT, DAI): (1, -1, 6)
+- ETH/WETH: (2, -1, 18)
+- BTC/WBTC: (3, -1, 8)
+- Generic tokens: (1, -1, 18)
+- Non-token types: (-1, -1, 18)
+
+### Financial Type Format
+
+- State variables: `[t], global, <variable_name>, f:<financial_type>`
+- Function parameters: `[t], <function_name>, <param_name>, f:<financial_type>`
+- Function returns: `[t], <function_name>, return, f:<financial_type>`
+- Struct fields: `[t*], global, <struct_name>, <field_name>, f:<financial_type>`
+
+#### Financial Types
+
+- `-1`: undefined
+- `0`: raw balance
+- `1`: net balance
+- `2`: accrued balance
+- `3`: final balance
+- `10`: compound fee ratio
+- `11`: transaction fee
+- `12`: simple fee ratio
+- `20`: simple interest ratio
+- `21`: compound interest ratio
+- `30`: reserve
+- `40`: price/exchange rate
+- `50`: debt
+- `60`: dividend/profit/reward
+
+## How It Works
+
+1. **Contract Parsing**: AutoScType analyzes the Solidity contract to extract variables, functions, structs, and their relationships.
+2. **Data Preparation**: The extracted contract elements are structured in a format suitable for AI analysis.
+3. **Batch Processing**: Instead of making multiple API calls, the entire contract is processed in a single AI inference request.
+4. **Type Inference**: The AI model analyzes patterns in variable and function names to determine appropriate types.
+5. **File Generation**: The inferred types are formatted according to the specified annotation formats and saved to output files.
+
+## Design Philosophy
+
+AutoScType is designed with the following principles:
+
+- **Efficiency**: Minimize API calls and processing time by using batch processing
+- **Context Awareness**: Analyze the entire contract to make more informed type decisions
+- **Flexibility**: Support multiple AI providers and adapt to different contract patterns
+- **Generality**: Work with any Ethereum smart contract, not just specific token types
+
+## Troubleshooting
+
+- **Empty Output Files**: Ensure your API key is valid and the rate limits haven't been exceeded
+- **API Errors**: Check the debug output for specific error messages from the AI provider
+- **Parsing Errors**: Make sure your Solidity contract is syntactically correct
+- **Missing Annotations**: If specific annotations are missing, consider adjusting the prompt or manually adding them
+
+## License
+
+MIT
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 # Purpose
 
 ScType2 is an upgraded version of the original static analysis tool written in Python3 to detect accounting errors in Solidity smart contracts. The original work can be found at [Github](https://github.com/NioTheFirst/ScType).
@@ -18,7 +144,7 @@ ScType2 now includes an automatic type annotation feature that uses GPT-4o to in
 
 ### How it works
 
-1. The tool analyzes the Solidity code using GPT-4o.
+1. The tool analyzes the Solidity code using deepseek-chat.
 2. It generates type annotations for variables, focusing on their financial meanings and characteristics.
 3. The generated annotations are used alongside any existing manual annotations.
 
@@ -29,9 +155,9 @@ To use the automatic type annotation feature:
 1. Ensure you have set up your OpenAI API key in the `generate_annotations.py` file.
 
 2. Run the annotation generator:
-For a single file:  `python generate_annotations.py file path/to/your/contract.sol`
+For a single file:  `python src/cli.py pathtoyourcontracts --output-dir nameofyouroutputfolder --api-key`
 
-For a directory: `python generate_annotations.py directory path/to/your/contracts/`
+For a directory: `python src/cli.py pathtoyourcontracts --output-dir nameofyouroutputfolder --api-key`
 
 3. The tool will generate two files for each processed Solidity file:
    - `{contract_name}_types.txt`: Contains token type annotations

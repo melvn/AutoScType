@@ -7,7 +7,7 @@ import requests
 import os
 
 class TypeGenerator:
-    def __init__(self, src_dir: str, api_key: Optional[str] = None, model_provider: str = "openai"):
+    def __init__(self, src_dir: str, api_key: Optional[str] = None, model_provider: str = "deepseek"):
         self.src_dir = Path(src_dir)
         self.model_provider = model_provider.lower()
         self.api_key = api_key

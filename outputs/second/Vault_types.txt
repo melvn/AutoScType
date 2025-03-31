@@ -1,0 +1,27 @@
+[*c], Vault
+
+```
+[*c], Vault
+[t], global, min, -1, -1, 18, 'u'
+[t], global, totalDepositCap, 1, -1, 18, 'u'
+[t], global, _shares, 1, -1, 18, 'u'
+[t], global, i, -1, -1, 18, 'u'
+[t], balance, return, 1, -1, 18, 'u'
+[t], balance2, return, 1, -1, 18, 'u'
+[t], balanceOfThis, return, 1, -1, 18, 'u'
+[t], getPricePerFullShare, return, 1, -1, 18, 'u'
+[t], getTokens, return, -1, -1, 18, 'u'
+[t], deposit, _amount, 1, -1, 18, 'u'
+[t], deposit, return, 1, -1, 18, 'u'
+[t], depositMultiple, _amounts, 1, -1, 18, 'u'
+[t], depositMultiple, return, 1, -1, 18, 'u'
+[t], withdraw, _shares, 1, -1, 18, 'u'
+[t], withdraw, return, 1, -1, 18, 'u'
+[t], withdrawAll, _output, -1, -1, 18, 'u'
+[t], available, _amount, 1, -1, 18, 'u'
+[t], available, return, 1, -1, 18, 'u'
+[t], withdrawFee, _amount, 1, -1, 18, 'u'
+[t], withdrawFee, return, 1, -1, 18, 'u'
+[ta], global, manager, -1
+[ta], global, gauge, -1
+```

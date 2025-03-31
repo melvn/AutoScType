@@ -1,0 +1,22 @@
+```
+[t], global, min, f:-1
+[t], global, totalDepositCap, f:0
+[t], global, _shares, f:0
+[t], global, i, f:-1
+[t], balance, return, f:1
+[t], balance2, return, f:0
+[t], balanceOfThis, return, f:0
+[t], getPricePerFullShare, return, f:40
+[t], getTokens, return, f:-1
+[t], deposit, _amount, f:0
+[t], deposit, return, f:0
+[t], depositMultiple, _amounts, f:0
+[t], depositMultiple, return, f:0
+[t], withdraw, _shares, f:0
+[t], withdraw, return, f:0
+[t], withdrawAll, _output, f:-1
+[t], available, _amount, f:0
+[t], available, return, f:0
+[t], withdrawFee, _amount, f:11
+[t], withdrawFee, return, f:11
+```
