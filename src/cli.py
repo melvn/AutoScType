@@ -24,6 +24,7 @@ def main():
     parser.add_argument("--model-provider", default="deepseek", choices=["openai", "deepseek"], 
                         help="LLM provider to use (openai or deepseek)")
     parser.add_argument("--debug", action="store_true", help="Enable debug output")
+    parser.add_argument("--reasoning", action="store_true", help="Enable reasoning model (R1) to improve annotation quality")
     
     args = parser.parse_args()
     
@@ -33,6 +34,7 @@ def main():
     print_retro(f"output_dir: {args.output_dir}", "debug")
     print_retro(f"api_key: {'Provided' if args.api_key else 'Not provided'}", "debug")
     print_retro(f"model_provider: {args.model_provider}", "debug")
+    print_retro(f"reasoning: {args.reasoning}", "debug")
     
     # Check if source directory/file exists
     src_path = Path(args.src_dir)
@@ -52,7 +54,7 @@ def main():
     # Create type generator with retro loading animation
     loading_bar("Initializing Type Generator", 30, 0.02)
     
-    generator = TypeGenerator(args.src_dir, args.api_key, args.model_provider)
+    generator = TypeGenerator(args.src_dir, args.api_key, args.model_provider, args.reasoning)
     
     # Generate type files with retro styling
     section_title("GENERATING TYPE FILES")
@@ -65,10 +67,30 @@ def main():
     # Verify output directory contents
     output_files = list(output_path.glob("*"))
     
+    # Calculate cost estimation if tokens were tracked
+    cost_status = "N/A"
+    cost_estimate = 0.0
+    
+    if hasattr(generator, 'total_input_tokens') and hasattr(generator, 'total_output_tokens'):
+        input_tokens = generator.total_input_tokens
+        output_tokens = generator.total_output_tokens
+        
+        if input_tokens > 0 or output_tokens > 0:
+            cost_status, cost_estimate = estimate_api_cost(
+                input_tokens, 
+                output_tokens, 
+                args.model_provider,
+                args.reasoning
+            )
+    
     stats = {
         "Files Generated": len(output_files),
         "Elapsed Time": f"{elapsed_time:.2f} seconds",
-        "Model Provider": args.model_provider
+        "Model Provider": args.model_provider,
+        "Reasoning Model": "Enabled" if args.reasoning else "Disabled",
+        "Input Tokens": f"{generator.total_input_tokens:,}",
+        "Output Tokens": f"{generator.total_output_tokens:,}",
+        "Cost Estimate": f"${cost_estimate:.4f} ({cost_status})"
     }
     
     show_stats(stats)

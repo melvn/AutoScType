@@ -133,6 +133,81 @@ RETRO_QUOTES = [
     "Calculating token vectors...",
 ]
 
+# DeepSeek pricing information (USD per 1M tokens)
+PRICING = {
+    'deepseek': {
+        'input': {
+            'standard': 0.27,  # Cache miss rate
+            'discount': 0.135,  # 50% off during discount hours
+        },
+        'output': {
+            'standard': 1.10,
+            'discount': 0.550,  # 50% off during discount hours
+        }
+    },
+    'deepseek-reasoner': {
+        'input': {
+            'standard': 0.55,  # Cache miss rate 
+            'discount': 0.135,  # 75% off during discount hours
+        },
+        'output': {
+            'standard': 2.19,
+            'discount': 0.550,  # 75% off during discount hours
+        }
+    },
+    'openai': {
+        'input': {
+            'gpt-4o': 5.00,  # Approximate rate for GPT-4o
+        },
+        'output': {
+            'gpt-4o': 15.00,  # Approximate rate for GPT-4o
+        }
+    }
+}
+
+# Discount hours for DeepSeek (UTC 16:30-00:30)
+def is_discount_hour():
+    """Check if current time is within DeepSeek discount hours (UTC 16:30-00:30)"""
+    import datetime
+    # Use timezone-aware approach instead of deprecated utcnow()
+    now = datetime.datetime.now(datetime.UTC)
+    hour = now.hour
+    minute = now.minute
+    
+    # Convert to minutes since midnight for easier comparison
+    current_minutes = hour * 60 + minute
+    discount_start = 16 * 60 + 30  # 16:30 UTC
+    discount_end = 24 * 60 + 30    # 00:30 UTC next day
+    
+    return current_minutes >= discount_start or current_minutes <= discount_end
+
+def estimate_api_cost(input_tokens, output_tokens, model_provider="deepseek", use_reasoner=False):
+    """Estimate API usage cost based on token count and model provider"""
+    if model_provider.lower() == "deepseek":
+        rate_type = "discount" if is_discount_hour() else "standard"
+        # Use deepseek-reasoner pricing if reasoner flag is enabled
+        model_key = 'deepseek-reasoner' if use_reasoner else 'deepseek'
+        discount_status = "DISCOUNT RATE" if rate_type == "discount" else "STANDARD RATE"
+    elif model_provider.lower() == "openai":
+        rate_type = "standard"  # OpenAI doesn't have discounted hours
+        model_key = 'openai'
+        model = "gpt-4o"  # Default to GPT-4o pricing
+        discount_status = "STANDARD RATE"
+    else:
+        return "Unknown provider", 0.0
+    
+    # Get the appropriate pricing based on the model
+    if model_key == 'openai':
+        input_cost = (input_tokens / 1000000) * PRICING[model_key]['input'][model]
+        output_cost = (output_tokens / 1000000) * PRICING[model_key]['output'][model]
+    else:
+        # Handle both deepseek and deepseek-reasoner
+        input_cost = (input_tokens / 1000000) * PRICING[model_key]['input'][rate_type]
+        output_cost = (output_tokens / 1000000) * PRICING[model_key]['output'][rate_type]
+    
+    total_cost = input_cost + output_cost
+    return discount_status, total_cost
+
 def random_quote():
     """Return a random retro quote"""
     return random.choice(RETRO_QUOTES)

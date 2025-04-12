@@ -301,3 +301,18 @@ The number of true positives, false positives, missed-type-errors and not-type-e
 See the `README.md` file within for more details.
 
 The execution time of the tool was obtained by using a clock within the testing scripts. It can be compared to the `Elapsed time` output.
+
+## Reasoning Model (R1)
+
+The reasoning model uses DeepSeek's R1 model to improve annotation quality:
+
+- **How it works**: When enabled, AutoScType uses DeepSeek's R1 model instead of the standard DeepSeek Chat model.
+- **When to use it**: Enable this feature when you need higher quality annotations, especially for complex contracts.
+- **Benefits**:
+  - Improves annotation completeness and accuracy
+  - Enhanced reasoning capabilities for complex financial relationships
+  - Better at determining token semantics and financial types
+  - Particularly effective when dealing with complex contracts
+- **Usage**: Add the `--reasoning` flag to your command when running AutoScType
+
+The reasoning model has higher pricing than the standard model but provides significantly better results. During discount hours (UTC 16:30-00:30), the price difference is minimal due to higher discount rates for the reasoning model.
